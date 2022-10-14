@@ -4,6 +4,7 @@ import org.example.DivideByZeroExeption;
 import org.junit.jupiter.api.Test;
 import service.CalculatorService;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class CalculatorServiceTest {
@@ -41,6 +42,10 @@ public class CalculatorServiceTest {
 
         actual = calculatorService.divide(8,2);
         assertThat(actual).isEqualTo(4);
+
+        assertThatExceptionOfType(DivideByZeroExeption.class)
+                .isThrownBy(()-> calculatorService.divide(1,0))
+                .withMessage("делить на ноль нельзя");
     }
 }
 
